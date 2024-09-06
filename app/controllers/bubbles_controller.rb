@@ -19,6 +19,7 @@ class BubblesController < ApplicationController
 
   def update
     @bubble.update(bubble_params)
+    remove_image if params[:remove_image] == "true"
 
     redirect_to bubble_path(@bubble)
   end
@@ -38,6 +39,10 @@ class BubblesController < ApplicationController
     end
 
     def bubble_params
-      params.require(:bubble).permit(:title, :body, :color, :image, tag_ids: [])
+      params.require(:bubble).permit(:title, :body, :color, :image, :remove_image, tag_ids: [])
+    end
+
+    def remove_image
+      @bubble.image.purge
     end
 end

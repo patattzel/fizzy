@@ -13,12 +13,21 @@
 
   <%= form_with model: bubble, data: { controller: "form" } do | form | %>
     <div class="bubble__bubble bubble__meta bubble__attachment">
-      <label class="btn btn--plain input--file">
-        <%= image_tag "camera.svg", aria: { hidden: "true" }, size: 20 %>
-        <%= form.file_field :image, class: "input", accept: "image/*",
-              data: { action: "upload-preview#previewImage change->form#submit" } %>
-        <span class="for-screen-reader">Upload an image</span>
-      </label>
+      <% if bubble.image.attached? %>
+        <%= tag.label class:"btn btn--negative", data: { action: "click->upload-preview#clear click->form#submit", upload_preview_target: "button" } do %>
+          <%= image_tag "minus.svg", aria: { hidden: "true" }, size: 24 %>
+          <%= form.hidden_field :bubble, value: bubble.id %>
+          <%= check_box_tag "remove_image", "true" %>
+          <span class="for-screen-reader">Remove imagee</span>
+        <% end %>
+      <% else %>
+        <label class="btn btn--plain input--file">
+          <%= image_tag "camera.svg", aria: { hidden: "true" }, size: 20 %>
+          <%= form.file_field :image, class: "input", accept: "image/*",
+                data: { action: "upload-preview#previewImage change->form#submit" } %>
+          <span class="for-screen-reader">Upload an image</span>
+        </label>
+      <% end %>
     </div>
   <% end %>
 
