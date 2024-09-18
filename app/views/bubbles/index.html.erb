@@ -1,3 +1,5 @@
+<% @page_title = @project.name %>
+
 <% content_for :header do %>
   <nav>
     <%= link_to projects_path, class: "btn flex-item-justify-start" do %>
@@ -21,15 +23,6 @@
     <%= button_to project_bubbles_path(@project), method: :post, params: { bubble: { title: "Untitled"} }, class: "btn btn--plain", form_class: "flex-item-justify-end" do %>
       <%= image_tag "bubble-add.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Create a new bubble</span>
-    <% end %>
-  </nav>
-<% end %>
-
-<% content_for :footer do %>
-  <nav>
-    <%= button_to session_path, method: :delete, class: "btn center", form_class: " center" do %>
-      <%= image_tag "logout.svg", aria: { hidden: true }, size: 24 %>
-      <span class="for-screen-reader">Sign out</span>
     <% end %>
   </nav>
 <% end %>

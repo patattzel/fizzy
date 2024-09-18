@@ -1,6 +1,18 @@
-<h1>Projects</h1>
+<% @page_title = "Projects" %>
 
-<p><%= link_to "New", new_project_path %></p>
+<% content_for :header do %>
+  <nav>
+    <%= button_to session_path, method: :delete, class: "btn", form_class: "flex-item-justify-start" do %>
+      <%= image_tag "logout.svg", aria: { hidden: true }, size: 24 %>
+      <span class="for-screen-reader">Sign out</span>
+    <% end %>
+
+    <%= link_to new_project_path, class: "btn flex-item-justify-end" do %>
+      <%= image_tag "add.svg", aria: { hidden: true }, size: 24 %>
+      <span class="for-screen-reader">Add a new project</span>
+    <% end %>
+  </nav>
+<% end %>
 
 <ul>
   <% @projects.each do |project| %>
