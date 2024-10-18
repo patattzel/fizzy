@@ -13,6 +13,6 @@
   <% end %>
 </h2>
 
-<% unless default_bucket_view? %>
+<% unless default_filters? %>
   <%= render "bubbles/filters/bucket_view_form", bucket: bucket, view: view %>
 <% end %>
